@@ -3,252 +3,446 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
   <title>Shivam Singh</title>
-
   <meta name="author" content="Shivam Singh">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <meta name="color-scheme" content="dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --bg-elevated: #161b22;
+      --bg-elevated-hover: #1c2330;
+      --border: #262c36;
+      --border-hover: #3a4453;
+      --text: #d7dee8;
+      --text-muted: #99a4b0;
+      --heading: #f3f6fb;
+      --accent: #7bb0ff;
+      --accent-hover: #ffb877;
+      --maxw: 820px;
+    }
 
+    * { box-sizing: border-box; }
+
+    html { background-color: var(--bg); scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      background-image: radial-gradient(1100px 520px at 50% -160px, rgba(123, 176, 255, 0.10), transparent 70%);
+      background-repeat: no-repeat;
+      color: var(--text);
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .15s ease; }
+    a:hover, a:focus { color: var(--accent-hover); }
+    strong { color: var(--heading); font-weight: 700; }
+    p { margin: 0 0 14px; }
+
+    /* ---------- Sticky nav ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      background: rgba(13, 17, 23, 0.72);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-name { color: var(--heading); font-weight: 700; letter-spacing: .3px; }
+    .nav-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .nav-links a { color: var(--text-muted); font-size: 15px; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ---------- Layout ---------- */
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px 96px; }
+    section { padding-top: 44px; }
+
+    h2.section-title {
+      color: var(--heading);
+      font-weight: 400;
+      font-size: 24px;
+      letter-spacing: .3px;
+      margin: 0 0 4px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+      padding-top: 52px;
+    }
+    .hero-text { flex: 1 1 auto; }
+    .hero h1 {
+      color: var(--heading);
+      font-weight: 300;
+      font-size: 44px;
+      letter-spacing: .5px;
+      margin: 0 0 6px;
+    }
+    .hero .role {
+      color: var(--accent);
+      font-weight: 400;
+      font-size: 17px;
+      margin: 0 0 18px;
+    }
+    .hero .bio { color: var(--text); }
+    .photo {
+      flex: 0 0 220px;
+      width: 220px;
+      height: 220px;
+    }
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 38px rgba(0, 0, 0, 0.5);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .photo img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 16px 48px rgba(123, 176, 255, 0.28);
+    }
+
+    /* status chip + links */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      padding: 6px 14px;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+    .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: #3fb950; box-shadow: 0 0 0 3px rgba(63,185,80,.18); }
+
+    .links {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .links a {
+      padding: 7px 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 15px;
+      transition: border-color .18s ease, background .18s ease, color .18s ease;
+    }
+    .links a:hover { border-color: var(--accent); color: var(--accent); background: rgba(123,176,255,.08); }
+    .links .placeholder { opacity: .6; border-style: dashed; }
+
+    /* ---------- News ---------- */
+    .news { list-style: none; margin: 14px 0 0; padding: 0; }
+    .news li {
+      position: relative;
+      padding: 8px 0 8px 22px;
+      color: var(--text);
+      border-bottom: 1px solid rgba(38,44,54,.6);
+    }
+    .news li:last-child { border-bottom: 0; }
+    .news li::before {
+      content: "";
+      position: absolute;
+      left: 2px; top: 16px;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .news .date { color: var(--text-muted); font-weight: 700; }
+
+    /* ---------- Research / cards ---------- */
+    .interests { color: var(--text-muted); margin: 14px 0 22px; }
+    .paper {
+      display: flex;
+      gap: 22px;
+      padding: 20px;
+      margin-bottom: 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .paper:hover { background: var(--bg-elevated-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+    .paper .thumb {
+      flex: 0 0 150px;
+      width: 150px;
+      height: 110px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, #1b2536, #232c3d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      text-align: center;
+    }
+    .paper .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .paper .info { flex: 1 1 auto; min-width: 0; }
+    .paper .ptitle { color: var(--heading); font-weight: 700; font-size: 16px; }
+    .paper .authors { margin: 6px 0; color: var(--text-muted); }
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      color: var(--accent);
+      background: rgba(123,176,255,.12);
+      border: 1px solid rgba(123,176,255,.35);
+      border-radius: 999px;
+    }
+    .badge.review { color: #ffb877; background: rgba(255,184,119,.12); border-color: rgba(255,184,119,.35); }
+    .paper .plinks { margin: 8px 0; font-size: 15px; }
+    .paper .plinks a { color: var(--accent); }
+    .paper .summary { color: var(--text-muted); font-size: 15px; margin: 6px 0 0; }
+
+    /* ---------- Projects ---------- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .project {
+      display: flex;
+      flex-direction: column;
+      padding: 18px 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .project:hover { background: var(--bg-elevated-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+    .project h3 { color: var(--heading); font-weight: 700; font-size: 16px; margin: 0 0 8px; }
+    .project p { color: var(--text-muted); font-size: 15px; margin: 0 0 14px; flex: 1 1 auto; }
+    .project .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .project .tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 9px;
+    }
+    .project .plinks { font-size: 14.5px; }
+    .project .plinks a { color: var(--accent); }
+
+    /* ---------- Experience ---------- */
+    .exp { list-style: none; margin: 16px 0 0; padding: 0; }
+    .exp li {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(38,44,54,.6);
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .exp li:last-child { border-bottom: 0; }
+    .exp .when { flex: 0 0 150px; color: var(--text-muted); font-weight: 700; font-size: 14.5px; }
+    .exp .what { flex: 1 1 320px; }
+    .exp .what .role { color: var(--heading); font-weight: 700; }
+    .exp .what .org { color: var(--accent); }
+    .exp .what p { color: var(--text-muted); font-size: 15px; margin: 4px 0 0; }
+
+    /* ---------- Teaching ---------- */
+    .teach { list-style: none; margin: 16px 0 0; padding: 0; }
+    .teach li {
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+    .teach li strong { display: block; margin-bottom: 4px; }
+
+    footer {
+      margin-top: 56px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .note {
+      max-width: var(--maxw);
+      margin: 20px auto 0;
+      padding: 12px 20px;
+      color: #ffb877;
+      font-size: 13px;
+    }
+
+    @media (max-width: 680px) {
+      .hero { flex-direction: column-reverse; align-items: flex-start; text-align: left; }
+      .photo { flex-basis: 150px; width: 150px; height: 150px; }
+      .hero h1 { font-size: 34px; }
+      .nav-links { display: none; }
+      .paper { flex-direction: column; }
+      .paper .thumb { width: 100%; flex-basis: auto; height: 150px; }
+      .exp .when { flex-basis: auto; }
+    }
+  </style>
 </head>
 
 <body>
-  <table
-    style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table
-            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr style="padding:0px">
-                <td style="padding:2.5%;width:63%;vertical-align:middle">
-                  <p class="name" style="text-align: center;">
-                    Shivam Singh
-                  </p>
-                  <p>
-                    <!-- I'm a Computer Science PhD student at <a href="https://deepmind.google/">Arizona State University/a> in San Francisco, where I lead a small team that mostly works on <a href="https://www.matthewtancik.com/nerf">NeRF</a>.
-		At Google I've worked on <a href="https://www.google.com/glass/start/">Glass</a>,  <a href="https://ai.googleblog.com/2014/04/lens-blur-in-new-google-camera-app.html">Lens Blur</a>, <a href="https://ai.googleblog.com/2014/10/hdr-low-light-and-high-dynamic-range.html">HDR+</a>, <a href="https://blog.google/products/google-ar-vr/introducing-next-generation-jump/">VR</a>, <a href="https://ai.googleblog.com/2017/10/portrait-mode-on-pixel-2-and-pixel-2-xl.html">Portrait Mode</a>, <a href="https://ai.googleblog.com/2020/12/portrait-light-enhancing-portrait.html">Portrait Light</a>, <a href="https://blog.google/products/maps/three-maps-updates-io-2022/">Maps</a>, and <a href="https://research.google/blog/bringing-3d-shoppable-products-online-with-generative-ai/">Shopping</a>.
-		I did my PhD at <a href="http://www.eecs.berkeley.edu/">UC Berkeley</a>, where I was advised by <a href="http://www.cs.berkeley.edu/~malik/">Jitendra Malik</a>.
-		I've received the <a href="https://www.thecvf.com/?page_id=413#YRA">PAMI Young Researcher Award</a>. -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-name">Shivam Singh</span>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
+        <a href="#teaching">Teaching</a>
+      </div>
+    </div>
+  </nav>
 
-                    I'm a Computer Science PhD student at Arizona State University specializing in computer vision and
-                    generative models, with a focus on controllable
-                    image and video generation. I am broadly interested in developing theoretical foundations and
-                    practical tools for
-                    generative models, for use-cases like image editing and personalization. I’m also interested in
-                    reinforcement
-                    learning (RL) to steer generative models to outputs closely aligned with human
-                    preferences. I have over 2
-                    years of research experience in model fine-tuning and large-scale image generation.
-                  </p>
-                  <p>Previously, I completed my Bachelor’s degree in Computer Science at Jadavpur University, India
-                    where I worked as an undergraduate research assistant conducting research on AI in medical imaging.
-                  </p>
-                  <p>If you’d like to discuss research opportunities, please feel free to reach out via email.</p>
+  <div class="wrap">
 
-                  <p style="text-align:center">
-                    <a href="mailto:ssing631@asu.edu">Email</a> &nbsp;/&nbsp;
-                    <a href="data/CV_shibu__Copy_.pdf">CV</a> &nbsp;/&nbsp;
-                    <a href="https://scholar.google.com/citations?user=wT13mC4AAAAJ&hl=en">Scholar</a> &nbsp;/&nbsp;
-                    <a href="https://github.com/shivamsingh-gpu/">Github</a>
-                  </p>
-                </td>
-                <td style="padding:2.5%;width:37%;max-width:37%">
-                  <a href="images/pfp.jpg"><img style="width:100%;max-width:100%;aspect-ratio:1 / 1;object-fit:cover;border-radius:50%;display:block;"
-                      alt="profile photo" src="images/pfp.jpg" class="hoverZoomLink"></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table style="width:100%; margin:0 auto; border:0; border-spacing:0; padding:16px;">
-            <tbody>
-              <tr>
-                <td>
-                  <h2>News</h2>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table>
-            <tr>
-              <td style="padding:16px;width:100%;vertical-align:middle">
-                <ul>
-                  <li><strong>October 2025</strong>: I will be presenting our work on RefEdit at ICCV 2025 in Hawaii!
-                  </li>
-                  <li><strong>September 2025</strong>: Our paper <a
-                      href="https://chimera-compositional-image-generation.vercel.app">Chimera</a> is under review at
-                    ICLR.</li>
-                  <li><strong>May 2025</strong>: Our paper <a href="https://refedit.vercel.app">RefEdit</a> is accepted
-                    to ICCV 2025!</li>
-                  <li><strong>August 2024</strong>: I have joined Arizona State University as a PhD student!</li>
-                </ul>
-              </td>
-            </tr>
-          </table>
+    <!-- ============ HERO / ABOUT ============ -->
+    <section id="about" class="hero">
+      <div class="hero-text">
+        <h1>Shivam Singh</h1>
+        <p class="role">Computer Vision &amp; Generative Models</p>
+        <p class="bio">
+          I'm a Computer Science PhD student at Arizona State University working on generative computer vision. My research interests lie specifically in  the areas of layered image / video decomposition and editing, unified modeling for generation and understanding, and long horizon world modeling.
+        </p>
+        <span class="chip"><span class="dot"></span> Open to research collaborations — reach out by email</span>
+        <div class="links">
+          <a href="mailto:ssing631@asu.edu">Email</a>
+          <a href="data/CV_shibu__Copy_.pdf">CV</a>
+          <a href="https://scholar.google.com/citations?user=wT13mC4AAAAJ&hl=en">Google Scholar</a>
+          <a href="https://github.com/shivamsingh-gpu/">GitHub</a>
+          <a class="placeholder" href="#">LinkedIn ↗ (add)</a>
+          <a class="placeholder" href="#">X / Twitter ↗ (add)</a>
+        </div>
+      </div>
+      <div class="photo">
+        <a href="images/pfp.jpg"><img src="images/pfp.jpg" alt="Shivam Singh"></a>
+      </div>
+    </section>
 
+    <!-- ============ NEWS ============ -->
+    <section id="news">
+      <h2 class="section-title">News</h2>
+      <ul class="news">
+        <li><span class="date">May 2026</span> — Started as an Applied Scientist Intern at <strong>Prime Video &amp; Amazon MGM Studios</strong>, working on layered image decomposition and editing.</li>
+        <li><span class="date">Oct 2025</span> — Presenting our work on RefEdit at <strong>ICCV 2025</strong> in Hawaii!</li>
+        <li><span class="date">Sep 2025</span> — Our paper <a href="https://chimera-compositional-image-generation.vercel.app">Chimera</a> is out on arXiv!</li>
+        <li><span class="date">May 2025</span> — Our paper <a href="https://refedit.vercel.app">RefEdit</a> is accepted to ICCV 2025!</li>
+        <li><span class="date">Aug 2024</span> — Joined Arizona State University as a PhD student!</li>
+      </ul>
+    </section>
 
-          <table
-            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:16px;width:100%;vertical-align:middle">
-                  <h2>Publications</h2>
-                  <p>
-                    I'm interested in computer vision, deep learning, generative AI, and image processing.
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table
-            style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
+    <!-- ============ RESEARCH / PUBLICATIONS ============ -->
+    <section id="research">
+      <h2 class="section-title">Research</h2>
 
+      <div class="paper">
+        <div class="thumb"><img src="images/refedit-teaser.jpg" alt="RefEdit teaser"></div>
+        <div class="info">
+          <a href="https://refedit.vercel.app"><span class="ptitle">RefEdit: A Benchmark and Method for Improving Instruction-based Image Editing Model for Referring Expression</span></a>
+          <p class="authors">Bimsara Pathiraja, Maitreya Patel, <strong>Shivam Singh</strong>, Yezhou Yang, Chitta Baral</p>
+          <p><span class="badge">ICCV 2025</span></p>
+          <p class="plinks"><a href="https://refedit.vercel.app">project page</a> · <a href="https://arxiv.org/pdf/2506.03448">arXiv</a> · <a href="#">code</a> · <a href="#">bibtex</a></p>
+          <p class="summary">RefEdit, an instruction-based editing model trained on 20,000 synthetic triplets, outperforms baselines trained on millions of samples in complex scene editing and achieves state-of-the-art results on referring-expression and traditional benchmarks.</p>
+        </div>
+      </div>
 
-              <tr onmouseout="bolt3d_stop()" onmouseover="bolt3d_start()" bgcolor="#ffffd0">
-                <td style="padding:16px;width:20%;vertical-align:middle">
-                  <div class="one">
-                    <img src='images/eval2.pdf' width="160">
-                  </div>
-                  <script type="text/javascript">
-                    function bolt3d_start() {
-                      document.getElementById('bolt3d_image').style.opacity = "1";
-                    }
+      <div class="paper">
+        <div class="thumb"><img src="images/teaser-figure.drawio.png" alt="Chimera teaser"></div>
+        <div class="info">
+          <a href="https://chimera-compositional-image-generation.vercel.app"><span class="ptitle">Chimera: Compositional Image Generation using Part-Based Concepting</span></a>
+          <p class="authors"><strong>Shivam Singh</strong>, Yiming Chen, Agneet Chatterjee, Amit Raj, James Hays, Yezhou Yang, Chitta Baral</p>
+      
+          <p class="plinks"><a href="https://chimera-compositional-image-generation.vercel.app">project page</a> · <a href="https://arxiv.org/abs/2510.18083">arXiv</a></p>
+          <p class="summary">Chimera is a personalized image-generation model trained on a semantic part-based dataset, enabling novel object synthesis by combining parts from multiple images via textual instructions — outperforming baselines by 14% in compositional accuracy and 21% in visual quality.</p>
+        </div>
+      </div>
+    </section>
 
-                    function bolt3d_stop() {
-                      document.getElementById('bolt3d_image').style.opacity = "0";
-                    }
-                    bolt3d_stop()
-                  </script>
-                </td>
-                <td style="padding:8px;width:80%;vertical-align:middle">
-                  <a href="https://refedit.vercel.app">
-                    <span class="papertitle">RefEdit: A Benchmark and Method for Improving Instruction-based Image
-                      Editing Model for Referring Expression</span>
-                  </a>
-                  <br>
-                  <a href="https://scholar.google.com/citations?hl=en&user=7ViSGnIAAAAJ">Bimsara Pathiraja</a>,
-                  <a href="https://maitreyapatel.com">Maitreya Patel</a>,
-                  <strong>Shivam Singh</strong>,
-                  <a href="https://faculty.engineering.asu.edu/yezhouyang/">Yezhou Yang</a>,
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience">
+      <h2 class="section-title">Experience</h2>
+      <ul class="exp">
+        <li>
+          <div class="when">May 2026 – Present</div>
+          <div class="what">
+            <span class="role">Applied Scientist Intern</span> · <span class="org">Prime Video & Amazon MGM Studios</span>
+          <p>Working on layered image decomposition and editing.</p>
+          </div>
+        </li>
+        <li>
+          <div class="when">Aug 2024 – Present</div>
+          <div class="what">
+            <span class="role">Graduate Research Assistant</span> · <span class="org">Arizona State University</span>
+            <p>Computer vision and generative models for controllable image/video generation.</p>
+          </div>
+        </li>
+        <li>
+          <div class="when">20XX – 2024</div>
+          <div class="what">
+            <span class="role">Undergraduate Research Assistant</span> · <span class="org">Jadavpur University</span>
+            <p>Research on AI for medical imaging while completing a B.E. in Computer Science.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-                  <a href="https://scholar.google.com/citations?user=9Yd716IAAAAJ&hl=en">Chitta Baral</a>
-                  <br>
-                  <em>ICCV</em>, 2025
-                  <br>
-                  <a href="https://refedit.vercel.app">project page</a>
-                  /
-                  <a href="https://arxiv.org/pdf/2506.03448">arXiv</a>
-                  <p></p>
-                  <p>
-                    We develop RefEdit, an instruction-based editing model trained on 20,000 synthetic triplets,
-                    outperforms baselines trained on millions of samples in complex scene editing and achieves
-                    state-of-the-art results on referring expression and traditional benchmarks.
-                  </p>
-                </td>
-              </tr>
+    <!-- ============ TEACHING ============ -->
+    <section id="teaching">
+      <h2 class="section-title">Teaching</h2>
+      <ul class="teach">
+        <li>
+          <strong>Operating Systems <italic> (Fall 2024 & Fall 2025)</italic></strong>
+          Supervised exam review sessions and lab projects on core operating systems concepts such as process management, synchronization, and memory allocation.
+        </li>
+        <li>
+          <strong>Object-Oriented Programming &amp; Data Structures  (Spring 2025)</strong>
+          Assisted students with object-oriented design, data structures, and algorithms; held office hours and gave lab feedback.
+        </li>
+      </ul>
+    </section>
 
+    <footer>
+      Website inspired by <a href="http://jonbarron.github.io">Jon Barron</a>, modified by <a href="mailto:ssing631@asu.edu">Shivam Singh</a>.
+    </footer>
 
-              <tr onmouseout="ever_stop()" onmouseover="ever_start()">
-                <td style="padding:16px;width:20%;vertical-align:middle">
-                  <div class="one">
-                    <div class="two" id='ever_image'>
-                      <img src='images/teaser-figure.drawio.png' width=100%>
-                    </div>
-                    <img src='images/teaser-figure.drawio.png' width=100%>
-                  </div>
-                  <script type="text/javascript">
-                    function ever_start() {
-                      document.getElementById('ever_image').style.opacity = "1";
-                    }
-
-                    function ever_stop() {
-                      document.getElementById('ever_image').style.opacity = "0";
-                    }
-                    ever_stop()
-                  </script>
-                </td>
-                <td style="padding:8px;width:80%;vertical-align:middle">
-                  <a href="https://chimera-compositional-image-generation.vercel.app>
-                    <span class=" papertitle">Chimera: Compositional Image Generation using Part-Based Concepting
-                    </span>
-                  </a>
-                  <br>
-                  <strong>Shivam Singh</strong>,
-                  <a href="https://spectraorder.github.io">Yiming Chen</a>,
-                  <a href="https://agneetchatterjee.com">Agneet Chatterjee</a>,
-                  <a href="https://dorverbin.github.io/">Amit Raj</a>,
-                  <a href="https://scholar.google.com/citations?user=ozNFrecAAAAJ&hl=en">James Hays</a>,
-                  <a href="https://faculty.engineering.asu.edu/yezhouyang/">Yezhou Yang</a>,
-                  <a href="https://scholar.google.com/citations?user=9Yd716IAAAAJ&hl=en">Chitta Baral</a>
-                  <br>
-                  <em>Under Review</em>, 2025 &nbsp
-                  <br>
-                  <a href="https://chimera-compositional-image-generation.vercel.app">project page</a>
-                  /
-                  <a href="https://arxiv.org/abs/2510.18083">arXiv</a>
-                  <p></p>
-                  <p>
-                    Chimera is a personalized image generation model trained on a semantic part-based dataset, enabling
-                    novel object synthesis by combining parts from multiple images via textual instructions,
-                    outperforming baselines by 14% in compositional accuracy and 21% in visual quality.
-                  </p>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-          <table style="width:100%; margin:0 auto; border:0; border-spacing:0; padding:16px;">
-            <tbody>
-              <tr>
-                <td>
-                  <h2>Teaching</h2>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table
-            style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:16px;width:100%;vertical-align:middle">
-                  <ul>
-                    <li>
-                      <strong>Operating Systems (Upper-level Undergraduate, Fall 2024)</strong> – Supported a class of
-                      150+ students by holding exam review sessions, and guiding students on lab projects involving
-                      process management, synchronization, and memory allocation.
-                    </li>
-                    <li>
-                      <strong>Object-Oriented Programming and Data Structures (First-year Undergraduate, Spring
-                        2025)</strong> – Assisted a class of 100+ students with coursework covering object-oriented
-                      design principles, data structures (lists, trees, graphs), and algorithms. Held office hours to
-                      clarify concepts and provide feedback on lab implementations.
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table
-            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:0px">
-                  <br>
-                  <p style="text-align:right;font-size:small;">
-                    This website is inspired by <a href="http://jonbarron.github.io">Jon Barron</a> and modified by <a
-                      href=mailto:ssing631@asu.edu>Shivam Singh</a>.
-
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-  </table>
+  </div>
 </body>
 
 </html>
