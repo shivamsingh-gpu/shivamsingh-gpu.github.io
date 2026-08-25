@@ -259,6 +259,12 @@
     .project .plinks { font-size: 14.5px; }
     .project .plinks a { color: var(--accent); }
 
+    /* full-width teaser variant (image banner spans the whole card) */
+    .paper.has-teaser { flex-direction: column; gap: 0; padding: 0; overflow: hidden; }
+    .paper.has-teaser .teaser-wide { width: 100%; }
+    .paper.has-teaser .teaser-wide img { width: 100%; height: auto; display: block; border-bottom: 1px solid var(--border); }
+    .paper.has-teaser .info { padding: 20px; }
+
     /* ---------- Experience ---------- */
     .exp { list-style: none; margin: 16px 0 0; padding: 0; }
     .exp li {
@@ -325,6 +331,7 @@
         <a href="#about">About</a>
         <a href="#news">News</a>
         <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a href="#teaching">Teaching</a>
       </div>
@@ -347,8 +354,6 @@
           <a href="data/CV_shibu__Copy_.pdf">CV</a>
           <a href="https://scholar.google.com/citations?user=wT13mC4AAAAJ&hl=en">Google Scholar</a>
           <a href="https://github.com/shivamsingh-gpu/">GitHub</a>
-          <a class="placeholder" href="#">LinkedIn ↗ (add)</a>
-          <a class="placeholder" href="#">X / Twitter ↗ (add)</a>
         </div>
       </div>
       <div class="photo">
@@ -395,6 +400,30 @@
       </div>
     </section>
 
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="paper has-teaser">
+        <div class="teaser-wide"><img src="images/image.webp" alt="Seamless 360° panorama teaser"></div>
+        <div class="info">
+    <a href="#"><span class="ptitle">Seamless 360° Panoramas via Circular MultiDiffusion: Modular Tiling for Continuous Wraparound Generation</span></a>
+    <p><span class="badge">2026</span></p>
+    <p class="plinks"><a href="https://github.com/shivamsingh-gpu/panoramic-multidiffusion">code</a></p>
+    <p class="summary">Extended MultiDiffusion (Bar-Tal et al., 2023) and InfiniteDiffusion (Goslin, 2026) to produce truly seamless 360° panoramas by making tile splat/read modular. </p>
+  </div>
+</div>
+
+      <div class="paper">
+  <div class="info">
+    <a href="#"><span class="ptitle">Virtual Insomnia Patient — Clinical Simulation Platform</span></a>
+    <p style="font-style: italic; color: var(--text-muted); margin: 6px 0;">Funded by DoD — in collaboration with UofA</p>
+    <p><span class="badge">Jan–May 2026</span></p>
+    <p class="summary">Developed agents to function as virtual standardized insomnia patients for therapist training and clinical education. Finetuned LLMs for context-aware dialogue systems to simulate realistic patient–therapist interactions.</p>
+  </div>
+</div>
+
+    </section>
+
     <!-- ============ EXPERIENCE ============ -->
     <section id="experience">
       <h2 class="section-title">Experience</h2>
@@ -414,7 +443,7 @@
           </div>
         </li>
         <li>
-          <div class="when">20XX – 2024</div>
+          <div class="when">2020 – 2024</div>
           <div class="what">
             <span class="role">Undergraduate Research Assistant</span> · <span class="org">Jadavpur University</span>
             <p>Research on AI for medical imaging while completing a B.E. in Computer Science.</p>
@@ -428,7 +457,7 @@
       <h2 class="section-title">Teaching</h2>
       <ul class="teach">
         <li>
-          <strong>Operating Systems <italic> (Fall 2024 & Fall 2025)</italic></strong>
+          <strong>Operating Systems <em>(Fall 2024 &amp; Fall 2025)</em></strong>
           Supervised exam review sessions and lab projects on core operating systems concepts such as process management, synchronization, and memory allocation.
         </li>
         <li>
